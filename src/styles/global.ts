@@ -9,11 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
 
   }
-
-  header {
-    font-family: 'Baloo 2', cursive;
-  }
-
+  
   body {
     font-family: 'Roboto', sans-serif;
     
