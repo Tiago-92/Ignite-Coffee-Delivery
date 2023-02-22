@@ -7,7 +7,8 @@ export const HeaderContainer = styled.header`
 
   padding: 2rem 10rem 0 10rem;
 
-  @media (max-width: 700px) {
+  @media (max-width: 600px) {
+    width: 100%;
     padding: 0;
 
     justify-content: space-around;

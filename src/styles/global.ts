@@ -12,6 +12,10 @@ export const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: 'Roboto', sans-serif;
-    
+  }
+
+  button {
+    cursor: pointer;
+    transition: filter 0.2s;
   }
 `
