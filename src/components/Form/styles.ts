@@ -1,0 +1,88 @@
+import styled from 'styled-components'
+
+export const CheckoutContainer = styled.div`
+  width: 40rem;
+  height: 23.25rem;
+
+  background: ${(props) => props.theme['base-card']};
+  border-radius: 6px;
+
+  margin-top: 0.94rem;
+  margin-left: 10rem;
+
+  h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.31rem;
+    text-align: left;
+    color: ${(props) => props.theme['base-subtitle']};
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    padding-top: 2.5rem;
+    padding-left: 2.5rem;
+  }
+
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.87rem;
+    font-weight: 400;
+    line-height: 1.12rem;
+    text-align: left;
+    color: ${(props) => props.theme['base-text']};
+
+    margin-top: 2px;
+    margin-left: 4.37rem;
+  }
+`
+
+export const CheckoutForm = styled.form`
+  .input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    margin-top: 2rem;
+    margin-left: 2.5rem;
+
+    .zip-code {
+      width: 12.5rem;
+    }
+
+    .street {
+      width: 35rem;
+    }
+
+    .input-flex {
+      display: flex;
+      gap: 0.75rem;
+
+      .number {
+        width: 12.5rem;
+      }
+      .complement {
+        width: 21.75rem;
+      }
+    }
+
+    .input-flex2 {
+      display: flex;
+      gap: 0.75rem;
+
+      .neighborhood {
+        width: 12.5rem;
+      }
+
+      .city {
+        width: 17.25rem;
+      }
+
+      .FU {
+        width: 3.75rem;
+      }
+    }
+  }
+`

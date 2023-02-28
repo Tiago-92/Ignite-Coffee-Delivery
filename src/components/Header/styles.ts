@@ -2,8 +2,11 @@ import styled from 'styled-components'
 
 export const HeaderContainer = styled.header`
   display: flex;
-  width: 100%;
   justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  height: 6.5rem;
 
   padding: 2rem 10rem 0 10rem;
 
