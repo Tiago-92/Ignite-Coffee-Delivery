@@ -14,18 +14,31 @@ export function Form() {
         <p>Informe o endereço onde deseja receber seu pedido</p>
 
         <div className="input-container">
-          <Input placeholder="CEP" className="zip-code" />
-          <Input placeholder="Rua" className="street" />
-
+          <div className="zip-code">
+            <Input placeholder="CEP" />
+          </div>
+          <div className="street">
+            <Input placeholder="Rua" />
+          </div>
           <div className="input-flex">
-            <Input placeholder="Número" className="number" />
-            <Input placeholder="Complemento" className="complement" />
+            <div className="number">
+              <Input placeholder="Número" />
+            </div>
+            <div className="complement">
+              <Input placeholder="Complemento" />
+            </div>
           </div>
 
           <div className="input-flex2">
-            <Input placeholder="Bairro" className="neighborhood" />
-            <Input placeholder="Cidade" className="city" />
-            <Input placeholder="UF" className="FU" />
+            <div className="neighborhood">
+              <Input placeholder="Bairro" />
+            </div>
+            <div className="city">
+              <Input placeholder="Cidade" />
+            </div>
+            <div className="FU">
+              <Input placeholder="UF" />
+            </div>
           </div>
         </div>
       </CheckoutForm>

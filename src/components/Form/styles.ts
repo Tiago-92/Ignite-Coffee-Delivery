@@ -10,6 +10,17 @@ export const CheckoutContainer = styled.div`
   margin-top: 0.94rem;
   margin-left: 10rem;
 
+  @media (max-width: 600px) {
+    width: 100%;
+    height: 26.25rem;
+
+    margin: 0;
+
+    p {
+      margin: 0;
+    }
+  }
+
   h1 {
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
@@ -40,48 +51,124 @@ export const CheckoutContainer = styled.div`
 `
 
 export const CheckoutForm = styled.form`
-  .input-container {
+  @media (max-width: 600px) {
+    margin: 0;
     display: flex;
+    align-items: left;
+    justify-content: center;
     flex-direction: column;
-    gap: 1rem;
 
-    margin-top: 2rem;
-    margin-left: 2.5rem;
-
-    .zip-code {
-      width: 12.5rem;
-    }
-
-    .street {
-      width: 35rem;
-    }
-
-    .input-flex {
+    .input-container {
       display: flex;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 1rem;
 
-      .number {
-        width: 12.5rem;
+      padding-left: 2rem;
+
+      margin-top: 2rem;
+
+      .zip-code {
+        input {
+          width: 15.62rem;
+        }
       }
-      .complement {
-        width: 21.75rem;
+
+      .street {
+        input {
+          width: 21rem;
+        }
+      }
+
+      .input-flex {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+
+        .number,
+        .complement {
+          input {
+            width: 10rem;
+          }
+        }
+      }
+
+      .input-flex2 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        .neighborhood,
+        .city {
+          input {
+            width: 10rem;
+          }
+        }
+
+        .FU {
+          input {
+            width: 3.75rem;
+          }
+        }
       }
     }
+  }
 
-    .input-flex2 {
+  @media (min-width: 600px) {
+    .input-container {
       display: flex;
-      gap: 0.75rem;
+      flex-direction: column;
+      gap: 1rem;
 
-      .neighborhood {
-        width: 12.5rem;
+      margin-top: 2rem;
+      margin-left: 2.5rem;
+
+      .zip-code {
+        input {
+          width: 12.5rem;
+        }
       }
 
-      .city {
-        width: 17.25rem;
+      .street {
+        input {
+          width: 35rem;
+        }
       }
 
-      .FU {
-        width: 3.75rem;
+      .input-flex {
+        display: flex;
+        gap: 0.75rem;
+
+        .number {
+          input {
+            width: 12.5rem;
+          }
+        }
+        .complement {
+          input {
+            width: 21.75rem;
+          }
+        }
+      }
+
+      .input-flex2 {
+        display: flex;
+        gap: 0.75rem;
+
+        .neighborhood {
+          width: 12.5rem;
+        }
+
+        .city {
+          input {
+            width: 17.25rem;
+          }
+        }
+
+        .FU {
+          input {
+            width: 3.75rem;
+          }
+        }
       }
     }
   }
