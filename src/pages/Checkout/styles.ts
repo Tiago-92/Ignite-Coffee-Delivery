@@ -1,6 +1,21 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+  @media (max-width: 600px) {
+    .flex-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .second-container {
+        .title-2 {
+          margin-left: 2rem;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+
   .flex-container {
     display: flex;
   }
