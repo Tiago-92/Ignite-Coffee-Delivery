@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { useState } from 'react'
+import { useContext } from 'react'
 
 import { CardContainer } from './styles'
 
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { BsCartFill } from 'react-icons/bs'
 
-import { cart } from '../../cart'
+import { CartContext } from '../../contexts/CartContext'
 
 interface CardProps {
   data: {
@@ -21,30 +21,8 @@ interface CardProps {
 }
 
 export function Card({ data }: CardProps) {
-  const [carts, setCarts] = useState(cart)
-  const [quantity, setQuantity] = useState(0)
-
-  function handleAddQuantity() {
-    setQuantity(quantity + 1)
-  }
-
-  function handleClearQuantity() {
-    setQuantity(quantity - 1)
-  }
-
-  function handleAddToCart(cartId: number) {
-    const newCart = carts.map((cart) => {
-      if (cart.id === cartId) {
-        return {
-          ...cart,
-          quantity,
-        }
-      }
-      return cart
-    })
-    setCarts(newCart)
-  }
-
+  const { handleAddQuantity, handleClearQuantity, handleAddToCart, quantity } =
+    useContext(CartContext)
   return (
     <CardContainer>
       <img src={data.img} />
@@ -57,11 +35,11 @@ export function Card({ data }: CardProps) {
         <div className="buy">R$ {data.price}</div>
 
         <span>
-          <button onClick={handleClearQuantity}>
+          <button onClick={() => handleClearQuantity(data.quantity)}>
             <AiOutlineMinus color="#8047f8" />
           </button>
           {quantity}
-          <button onClick={handleAddQuantity}>
+          <button onClick={() => handleAddQuantity(data.quantity)}>
             <AiOutlinePlus color="#8047f8" />
           </button>
         </span>
