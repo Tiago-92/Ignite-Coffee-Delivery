@@ -1,50 +1,66 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { useContext } from 'react'
-
 import { CardContainer } from './styles'
 
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { BsCartFill } from 'react-icons/bs'
-
+import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 
-interface CardProps {
-  data: {
-    id: number
-    img: string
-    tag: []
-    title: string
-    description: string
-    price: number
-    quantity: number
-  }
+export interface Coffee {
+  id: number
+  img: string
+  tag: string[]
+  title: string
+  description: string
+  price: number
+  quantity: number
 }
 
-export function Card({ data }: CardProps) {
-  const { handleAddQuantity, handleClearQuantity, handleAddToCart, quantity } =
-    useContext(CartContext)
+interface CoffeeProps {
+  coffee: Coffee
+}
+
+export function Card({ coffee }: CoffeeProps) {
+  const [quantity, setQuantity] = useState(1)
+  const { handleAddCoffeeToCart } = useContext(CartContext)
+
+  function addQuantity() {
+    setQuantity(quantity + 1)
+  }
+
+  function removeQuantity() {
+    setQuantity(quantity - 1)
+  }
+
+  function handleAddToCart() {
+    const coffeToAdd = {
+      ...coffee,
+      quantity,
+    }
+    handleAddCoffeeToCart(coffeToAdd)
+  }
   return (
     <CardContainer>
-      <img src={data.img} />
+      <img src={coffee.img} />
 
-      <span className="tag">{data.tag}</span>
-      <p className="coffee-name">{data.title}</p>
-      <p className="coffee-description">{data.description}</p>
+      <span className="tag">{coffee.tag}</span>
+      <p className="coffee-name">{coffee.title}</p>
+      <p className="coffee-description">{coffee.description}</p>
 
       <div className="price-and-quantity">
-        <div className="buy">R$ {data.price}</div>
+        <div className="buy">R$ {coffee.price}</div>
 
         <span>
-          <button onClick={() => handleClearQuantity(data.quantity)}>
+          <button disabled={quantity <= 1} onClick={removeQuantity}>
             <AiOutlineMinus color="#8047f8" />
           </button>
           {quantity}
-          <button onClick={() => handleAddQuantity(data.quantity)}>
+          <button onClick={addQuantity}>
             <AiOutlinePlus color="#8047f8" />
           </button>
         </span>
 
-        <button className="add-cart" onClick={() => handleAddToCart(data.id)}>
+        <button className="add-cart" onClick={handleAddToCart}>
           <BsCartFill size={19} />
         </button>
       </div>

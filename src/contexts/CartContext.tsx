@@ -1,12 +1,17 @@
-import { useState, createContext, ReactNode } from 'react'
+/* eslint-disable no-undef */
+import { useState, createContext, ReactNode, useEffect } from 'react'
 
-import { cart } from '../cart'
+import { Coffee } from '../components/Card'
+
+import { produce } from 'immer'
+
+export interface CartItem extends Coffee {
+  quantity: number
+}
 
 interface CartContextType {
-  handleAddQuantity: (quantity: number) => void
-  handleClearQuantity: (quantity: number) => void
-  handleAddToCart: (cartId: number) => void
-  quantity: number
+  cartItems: CartItem[]
+  handleAddCoffeeToCart: (coffee: CartItem) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -15,39 +20,41 @@ interface CartContextProviderProps {
   children: ReactNode
 }
 
+const COFFEE_STORAGE_KEY = 'coffeeDelivery:cartItens'
+
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [carts, setCarts] = useState(cart)
-  const [quantity, setQuantity] = useState(0)
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const storedCartItens = localStorage.getItem(COFFEE_STORAGE_KEY)
+    if (storedCartItens) {
+      return JSON.parse(storedCartItens)
+    }
+    return []
+  })
 
-  function handleAddQuantity() {
-    setQuantity(quantity + 1)
-  }
+  function handleAddCoffeeToCart(coffee: CartItem) {
+    const coffeeAlreadyExistisInCart = cartItems.findIndex(
+      (cartItem) => cartItem.id === coffee.id,
+    )
 
-  function handleClearQuantity() {
-    setQuantity(quantity - 1)
-  }
-
-  function handleAddToCart(cartId: number) {
-    const newCart = carts.map((cart) => {
-      if (cart.id === cartId) {
-        return {
-          ...cart,
-          quantity,
-        }
+    const newCart = produce(cartItems, (draft) => {
+      if (coffeeAlreadyExistisInCart < 0) {
+        draft.push(coffee)
+      } else {
+        draft[coffeeAlreadyExistisInCart].quantity += coffee.quantity
       }
-      return cart
     })
-    setCarts(newCart)
-    console.log(newCart)
+    setCartItems(newCart)
   }
+
+  useEffect(() => {
+    localStorage.setItem(COFFEE_STORAGE_KEY, JSON.stringify(cartItems))
+  }, [cartItems])
 
   return (
     <CartContext.Provider
       value={{
-        handleAddQuantity,
-        handleClearQuantity,
-        handleAddToCart,
-        quantity,
+        cartItems,
+        handleAddCoffeeToCart,
       }}
     >
       {children}

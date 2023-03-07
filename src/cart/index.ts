@@ -11,7 +11,7 @@ export const cart = [
     tag: ['TRADICIONAL'],
     description: 'O tradicional café feito com água quente e grãos moídos',
     price: 9.9,
-    quantity: 0,
+    quantity: 1,
   },
 
   {
@@ -20,7 +20,7 @@ export const cart = [
     title: 'Expresso Americano',
     tag: 'TRADICIONAL',
     description: 'Expresso diluído, menos intenso que o tradicional',
-    quantity: 0,
+    quantity: 1,
   },
 
   {
@@ -29,7 +29,7 @@ export const cart = [
     title: 'Expresso Cremoso',
     tag: 'TRADICIONAL',
     description: 'Café expresso tradicional com espuma cremosa',
-    quantity: 0,
+    quantity: 1,
   },
 
   {
@@ -38,6 +38,6 @@ export const cart = [
     title: 'Expresso Gelado',
     tag: ['TRADICIONAL', 'GELADO'],
     description: 'Bebida preparada com café expresso e cubos de gelo',
-    quantity: 0,
+    quantity: 1,
   },
 ]
