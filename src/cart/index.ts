@@ -20,6 +20,7 @@ export const cart = [
     title: 'Expresso Americano',
     tag: 'TRADICIONAL',
     description: 'Expresso diluído, menos intenso que o tradicional',
+    price: 9.9,
     quantity: 1,
   },
 
@@ -29,6 +30,7 @@ export const cart = [
     title: 'Expresso Cremoso',
     tag: 'TRADICIONAL',
     description: 'Café expresso tradicional com espuma cremosa',
+    price: 9.9,
     quantity: 1,
   },
 
@@ -38,6 +40,7 @@ export const cart = [
     title: 'Expresso Gelado',
     tag: ['TRADICIONAL', 'GELADO'],
     description: 'Bebida preparada com café expresso e cubos de gelo',
+    price: 9.9,
     quantity: 1,
   },
 ]

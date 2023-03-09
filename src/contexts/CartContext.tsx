@@ -1,9 +1,17 @@
 /* eslint-disable no-undef */
 import { useState, createContext, ReactNode, useEffect } from 'react'
 
-import { Coffee } from '../components/Card'
-
 import { produce } from 'immer'
+
+export interface Coffee {
+  id: number
+  img: string
+  tag: string[]
+  title: string
+  description: string
+  price: number
+  quantity: number
+}
 
 export interface CartItem extends Coffee {
   quantity: number
@@ -11,7 +19,14 @@ export interface CartItem extends Coffee {
 
 interface CartContextType {
   cartItems: CartItem[]
+  totalByItem: number
+  totalIntemsInCart: number
   handleAddCoffeeToCart: (coffee: CartItem) => void
+  handleAddQuantityById: (
+    cartItemId: number,
+    type: 'increase' | 'decrease',
+  ) => void
+  removeCartItem: (cartItemId: number) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -31,6 +46,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     return []
   })
 
+  const totalIntemsInCart = cartItems.length
+  console.log(totalIntemsInCart)
+
   function handleAddCoffeeToCart(coffee: CartItem) {
     const coffeeAlreadyExistisInCart = cartItems.findIndex(
       (cartItem) => cartItem.id === coffee.id,
@@ -46,6 +64,45 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     setCartItems(newCart)
   }
 
+  function handleAddQuantityById(
+    cartItemId: number,
+    type: 'increase' | 'decrease',
+  ) {
+    const newCart = produce(cartItems, (draft) => {
+      const coffeeExistsInCart = cartItems.findIndex(
+        (cartItem) => cartItem.id === cartItemId,
+      )
+
+      if (coffeeExistsInCart >= 0) {
+        const item = draft[coffeeExistsInCart]
+        draft[coffeeExistsInCart].quantity =
+          type === 'increase' ? item.quantity + 1 : item.quantity - 1
+      }
+    })
+
+    setCartItems(newCart)
+  }
+
+  function removeCartItem(cartItemId: number) {
+    const newCart = produce(cartItems, (draft) => {
+      const coffeeExistsInCart = cartItems.findIndex(
+        (cartItem) => cartItem.id === cartItemId,
+      )
+
+      if (coffeeExistsInCart >= 0) {
+        draft.splice(coffeeExistsInCart, 1)
+      }
+    })
+
+    setCartItems(newCart)
+  }
+
+  const totalByItem = cartItems.reduce((total, cartItem) => {
+    return total + cartItem.price * cartItem.quantity
+  }, 0)
+
+  console.log(cartItems)
+
   useEffect(() => {
     localStorage.setItem(COFFEE_STORAGE_KEY, JSON.stringify(cartItems))
   }, [cartItems])
@@ -55,6 +112,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       value={{
         cartItems,
         handleAddCoffeeToCart,
+        handleAddQuantityById,
+        removeCartItem,
+        totalByItem,
+        totalIntemsInCart,
       }}
     >
       {children}

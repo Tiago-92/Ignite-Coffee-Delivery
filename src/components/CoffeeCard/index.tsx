@@ -4,7 +4,11 @@ import { ItemsInCart } from '../ItemsInCart'
 import { CoffeCardContainer } from './styles'
 
 export function CoffeeCard() {
-  const { cartItems } = useContext(CartContext)
+  const { cartItems, totalByItem } = useContext(CartContext)
+
+  const delivery = 3.5
+  const totalValueWithDelivery = totalByItem + delivery
+
   return (
     <CoffeCardContainer>
       {cartItems.map((cart) => (
@@ -12,7 +16,7 @@ export function CoffeeCard() {
       ))}
       <div className="itens">
         <p>Total de itens</p>
-        <span>R$ 29,70</span>
+        <span>R$ {totalByItem}</span>
       </div>
       <div className="delivery">
         <p>Entrega</p>
@@ -20,7 +24,7 @@ export function CoffeeCard() {
       </div>
       <div className="total">
         <p>Total</p>
-        <span>R$ 32.20</span>
+        <span>R$ {totalValueWithDelivery}</span>
       </div>
 
       <button className="confirm">CONFIRMAR PEDIDO</button>

@@ -1,33 +1,54 @@
 import { Plus, Minus, Trash } from 'phosphor-react'
-import { CartItem } from '../../contexts/CartContext'
-import { Button } from '../Button'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
+import { Coffee } from '../Card'
 import { ItemsContainer } from './styles'
 
 interface ItemsProps {
-  coffee: CartItem
+  coffee: Coffee
 }
+
 export function ItemsInCart({ coffee }: ItemsProps) {
+  const { handleAddQuantityById, removeCartItem } = useContext(CartContext)
+
+  const totalValueByItem = coffee.quantity * coffee.price
+
+  function handleIncrease() {
+    handleAddQuantityById(coffee.id, 'increase')
+  }
+
+  function handleDecrease() {
+    handleAddQuantityById(coffee.id, 'decrease')
+  }
+
+  function handleRemove() {
+    removeCartItem(coffee.id)
+  }
+
   return (
     <ItemsContainer>
       <img src={coffee.img} alt="" />
       <div className="coffee-details">
         <div className="coffee-type">
           <p>{coffee.title}</p>
-          <span>{coffee.price}</span>
+          <span>{totalValueByItem}</span>
         </div>
 
         <div className="quantity">
           <span>
-            <button>
+            <button disabled={coffee.quantity <= 1} onClick={handleDecrease}>
               <Minus color="#8047f8" />
             </button>
-            1
-            <button>
+            {coffee.quantity}
+            <button onClick={handleIncrease}>
               <Plus color="#8047f8" />
             </button>
           </span>
           <div>
-            <Button title="REMOVER" icon={Trash} />
+            <button onClick={handleRemove}>
+              <Trash color="#8047f8" />
+              REMOVER
+            </button>
           </div>
         </div>
       </div>

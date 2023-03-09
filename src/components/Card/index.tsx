@@ -4,7 +4,7 @@ import { CardContainer } from './styles'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { BsCartFill } from 'react-icons/bs'
 import { useContext, useState } from 'react'
-import { CartContext } from '../../contexts/CartContext'
+import { CartContext, CartItem } from '../../contexts/CartContext'
 
 export interface Coffee {
   id: number
@@ -24,6 +24,14 @@ export function Card({ coffee }: CoffeeProps) {
   const [quantity, setQuantity] = useState(1)
   const { handleAddCoffeeToCart } = useContext(CartContext)
 
+  function handleAddToCart(coffee: CartItem) {
+    const coffeToAdd = {
+      ...coffee,
+      quantity,
+    }
+    handleAddCoffeeToCart(coffeToAdd)
+  }
+
   function addQuantity() {
     setQuantity(quantity + 1)
   }
@@ -32,13 +40,6 @@ export function Card({ coffee }: CoffeeProps) {
     setQuantity(quantity - 1)
   }
 
-  function handleAddToCart() {
-    const coffeToAdd = {
-      ...coffee,
-      quantity,
-    }
-    handleAddCoffeeToCart(coffeToAdd)
-  }
   return (
     <CardContainer>
       <img src={coffee.img} />
@@ -51,7 +52,7 @@ export function Card({ coffee }: CoffeeProps) {
         <div className="buy">R$ {coffee.price}</div>
 
         <span>
-          <button disabled={quantity <= 1} onClick={removeQuantity}>
+          <button disabled={coffee.quantity <= 1} onClick={removeQuantity}>
             <AiOutlineMinus color="#8047f8" />
           </button>
           {quantity}
@@ -60,7 +61,7 @@ export function Card({ coffee }: CoffeeProps) {
           </button>
         </span>
 
-        <button className="add-cart" onClick={handleAddToCart}>
+        <button className="add-cart" onClick={() => handleAddToCart(coffee)}>
           <BsCartFill size={19} />
         </button>
       </div>

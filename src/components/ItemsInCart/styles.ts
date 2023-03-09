@@ -79,6 +79,12 @@ export const ItemsContainer = styled.div`
 
           display: flex;
           justify-content: center;
+          align-items: center;
+          gap: 4px;
+
+          border-radius: 6px;
+          border: none;
+          background: ${(props) => props.theme['base-button']};
 
           font-family: 'Roboto', sans-serif;
           font-size: 0.75rem;
@@ -89,6 +95,10 @@ export const ItemsContainer = styled.div`
           svg {
             width: 1rem;
             height: 1rem;
+          }
+
+          &:hover {
+            background: ${(props) => props.theme['base-hover']};
           }
         }
       }

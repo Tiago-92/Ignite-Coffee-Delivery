@@ -40,10 +40,29 @@ export const HeaderContainer = styled.header`
       color: ${(props) => props.theme['purple-dark']};
       font-size: 0.87rem;
       font-weight: 400;
+    }
 
-      img {
-        width: 1.37rem;
-        height: 1.37rem;
+    button {
+      border: none;
+      position: relative;
+
+      .totalCart {
+        position: absolute;
+        right: -8.35px;
+        top: -8px;
+
+        display: flex;
+        align-items: center;
+
+        font-size: 0.75rem;
+
+        width: 1.25rem;
+        height: 1.25rem;
+
+        border-radius: 1000px;
+        background: ${(props) => props.theme['yellow-dark']};
+
+        color: ${(props) => props.theme['white-']};
       }
     }
   }
