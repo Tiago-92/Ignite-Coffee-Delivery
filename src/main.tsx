@@ -1,5 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import *  as ReactDOMClient from 'react-dom/client'
+
+const container = document.getElementById('root');
+
+const root = ReactDOMClient.createRoot(container);
+
 import { ThemeProvider } from 'styled-components'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -11,7 +16,7 @@ import { defaultTheme } from './styles/themes/default'
 
 import { Router } from './Router'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+root.render(
   <React.StrictMode>
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
