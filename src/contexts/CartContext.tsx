@@ -45,9 +45,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     }
     return []
   })
-
+  
   const totalIntemsInCart = cartItems.length
-  console.log(totalIntemsInCart)
 
   function handleAddCoffeeToCart(coffee: CartItem) {
     const coffeeAlreadyExistisInCart = cartItems.findIndex(

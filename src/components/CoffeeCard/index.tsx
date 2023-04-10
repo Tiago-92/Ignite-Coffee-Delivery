@@ -27,7 +27,7 @@ export function CoffeeCard() {
         <span>R$ {totalValueWithDelivery}</span>
       </div>
 
-      <button className="confirm">CONFIRMAR PEDIDO</button>
+      <button type="submit" className="confirm">CONFIRMAR PEDIDO</button>
     </CoffeCardContainer>
   )
 }

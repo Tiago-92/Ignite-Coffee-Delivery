@@ -3,17 +3,21 @@ import { SuccessCardContainer } from './styles'
 import mapIcon from '../../assets/map-icon.svg'
 import timerIcon from '../../assets/timer-icon.svg'
 import dollarIcon from '../../assets/dollar-icon.svg'
+import { useLocation } from 'react-router-dom'
 
 export function SuccessCard() {
+  const { state } = useLocation()
+
+  console.log(state)
   return (
     <SuccessCardContainer>
       <div className="adress">
         <img src={mapIcon} alt="" />
         <div className="text">
           <p>
-            Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+            Entrega em <strong>{state.street2}, {state.number2}</strong>
           </p>
-          <p>Farrapos - Porto Alegre, RS</p>
+          <p>{state.neighborhood2} - {state.city2}, {state.state2}</p>
         </div>
       </div>
       <div className="delivery-forecast">

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const CheckoutContainer = styled.div`
   width: 40rem;
   height: 23.25rem;
-
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
 
@@ -51,6 +50,9 @@ export const CheckoutContainer = styled.div`
 `
 
 export const CheckoutForm = styled.form`
+  display: flex;
+  gap: 2rem;
+  
   @media (max-width: 600px) {
     margin: 0;
     display: flex;
